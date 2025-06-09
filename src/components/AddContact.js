@@ -16,6 +16,7 @@ const AddContact = ({ addContactHandler }) => {
     setName("");
     setEmail("");
     navigate("/"); // <-- this takes you back to home page
+  
   };
 
   return (
