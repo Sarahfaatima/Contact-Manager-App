@@ -10,7 +10,7 @@ const ContactCard = ({ contact, clickHandler }) => {
       <img className="ui avatar image" src={user} alt={name} />
 
       <div className="content">
-        <Link to={`/contact/${id}`} style={{ color: "inherit", textDecoration: "none" }}>
+        <Link to={{pathname:`/contact/${id}`,state: {contact:contact}}} style={{ color: "inherit", textDecoration: "none" }} >
           <div className="header">{name}</div>
           <div>{email}</div>
         </Link>

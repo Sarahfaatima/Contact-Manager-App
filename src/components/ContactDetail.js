@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import userPlaceholder from "../images/user.jpg"; // fallback avatar
 
 const ContactDetail = ({ contacts }) => {
+  console.log(contacts);
   const { id } = useParams();               // grab the :id from the URL
   const [contact, setContact] = useState();
 
@@ -26,14 +27,16 @@ const ContactDetail = ({ contacts }) => {
     <div className="main">
       <div className="ui card centered">
         <div className="image">
+            <div style={{ marginTop: "6rem" }}></div>
           <img src={userPlaceholder} alt={contact.name} />
+          
         </div>
         <div className="content">
           <div className="header">{contact.name}</div>
           <div className="description">{contact.email}</div>
         </div>
       </div>
-      <div style={{ textAlign: "center", marginTop: "1rem" }}>
+      <div style={{ textAlign: "center", marginTop: "2rem" }}>
         <Link to="/">← Back to Contact List</Link>
       </div>
     </div>
