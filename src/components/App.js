@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { v4 as uuid } from 'uuid';
 import api from '../api/contacts';
@@ -8,19 +9,29 @@ import AddContact from "./AddContact";
 import ContactList from "./ContactList";
 import ContactDetail from "./ContactDetail";
 
-function App() {
-  const LOCAL_STORAGE_KEY = "contacts";
-  const [contacts, setContacts] = useState([]);
+function App() { 
+  const LOCAL_STORAGE_KEY = "contacts";   // constant variable named LOCAL_STORAGE_KEY and assigns it the value "contacts"
+  const [contacts, setContacts] = useState([]);   //contacts → used to display the list in UI, setContacts → used to update/add/delete contacts
+
+
 
   //RetrieveContacts
   const retrieveContacts = async () => {
-    const response = await api.get("/contacts");
+    const response = await axios.get("http://localhost:3000/contacts");
     return response.data;
   };
 
-  const addContactHandler = (contact) => {
-    setContacts([...contacts, { id: uuid(), ...contact }]);   // appends the new contact to the previous ones
+  const addContactHandler = async (contact) => {
+  const request = {
+    id: uuid(),
+    ...contact,
   };
+
+  const response = await api.post("/contacts", request);
+  console.log(response);
+  setContacts([...contacts, response.data]);
+};
+
 
   const removeContactHandler = (id) => {
     const newContactList = contacts.filter((contact) => contact.id !== id);
@@ -50,7 +61,7 @@ function App() {
 }, []);
 
 useEffect(() => {
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
+  // localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
 }, [contacts]);
 
 
