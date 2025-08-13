@@ -17,7 +17,7 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   //RetrieveContacts
   const retrieveContacts = async () => {
-    const response = await axios.get("http://localhost:3000/contacts");
+    const response = await axios.get("http://localhost:3001/contacts");
     return response.data;
   }; // used outside the UseEffect so that it can be reusable for other purposes as well
 
